@@ -8,7 +8,7 @@ use rspotify::{
 };
 
 pub use idtypes::*;
-use rspotify_model::{PlayableId, PlaylistResult};
+use rspotify_model::{PlayableId};
 
 // CLI Arguments
 #[derive(Parser, Debug)]
@@ -84,7 +84,11 @@ async fn populate_playlist(
                 .map(|t| t.id.as_ref().unwrap() as &dyn PlayableId)
                 .collect::<Vec<&dyn PlayableId>>();
 
-            add_tracks_to_playlist(&client, &playlist.id, track_ids).await;
+            // Add the tracks to the playlist
+            client
+                .playlist_add_items(&playlist.id, track_ids, None)
+                .await
+                .expect("Failed to add tracks to playlist");
         }
         _ => {}
     }
@@ -92,18 +96,6 @@ async fn populate_playlist(
         "✨ {} playlist 👉 {}",
         &playlist.name, playlist.external_urls["spotify"]
     ))
-}
-
-// Add tracks to the playlist
-async fn add_tracks_to_playlist(
-    spotify: &AuthCodePkceSpotify,
-    playlist_id: &PlaylistId,
-    tracks: Vec<&dyn PlayableId>,
-) -> PlaylistResult {
-    spotify
-        .playlist_add_items(playlist_id, tracks, None)
-        .await
-        .expect("Failed to add tracks to playlist")
 }
 
 // Create a new playlist
@@ -124,7 +116,7 @@ async fn create_playlist(
 async fn authorize_client() -> Result<AuthCodePkceSpotify, ClientError> {
     println!("You are about to be redirected to your browser to authenticate with Spotify");
     println!("Copy the URL that you are redirected to and paste it back here!");
-    
+
     sleep(Duration::from_secs(5));
 
     let credentials = Credentials::from_env().unwrap();
