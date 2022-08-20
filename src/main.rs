@@ -78,7 +78,7 @@ async fn populate_playlist(
     match tracks {
         SearchResult::Tracks(tracks) => {
             let mut tracks = tracks.items.clone();
-            tracks.sort_by(|a, b| a.popularity.cmp(&b.popularity));
+            tracks.sort_by(|a, b| b.popularity.cmp(&a.popularity));
 
             let track_ids = tracks
                 .iter()
