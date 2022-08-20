@@ -1,3 +1,5 @@
+use std::{thread::sleep, time::Duration};
+
 use clap::Parser;
 use rspotify::{
     model::{idtypes, FullPlaylist, SearchResult, SearchType},
@@ -120,6 +122,11 @@ async fn create_playlist(
 
 // Setup and authorize the client
 async fn authorize_client() -> Result<AuthCodePkceSpotify, ClientError> {
+    println!("You are about to be redirected to your browser to authenticate with Spotify");
+    println!("Copy the URL that you are redirected to and paste it back here!");
+    
+    sleep(Duration::from_secs(5));
+
     let credentials = Credentials::from_env().unwrap();
 
     let oauth =

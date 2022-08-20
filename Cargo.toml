@@ -1,6 +1,6 @@
 [package]
 name = "spotify-retro"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2021"
 description = "Spotify-Retro is a simple CLI tool that will generate a Spotify playlist for you based on the sprint number you provide"
 license = "MIT"
