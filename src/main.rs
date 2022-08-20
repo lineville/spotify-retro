@@ -71,9 +71,11 @@ async fn populate_playlist(
 ) -> Result<String, ClientError> {
     match tracks {
         SearchResult::Tracks(tracks) => {
-            let tracks = tracks.items.iter();
+            let mut tracks = tracks.items.clone();
+            tracks.sort_by(|a, b| a.popularity.cmp(&b.popularity));
 
             let track_ids = tracks
+                .iter()
                 .map(|t| t.id.as_ref().unwrap() as &dyn PlayableId)
                 .collect::<Vec<&dyn PlayableId>>();
 
