@@ -1,4 +1,4 @@
-# Spotify-Retro [![🚢 Publish](https://github.com/lineville/spotify-retro/actions/workflows/publish.yml/badge.svg)](https://github.com/lineville/spotify-retro/actions/workflows/publish.yml)
+# Spotify-Retro ![Crates.io](https://img.shields.io/crates/v/spotify-retro)
 
 Need a quick themed playlist for your upcoming Sprint Retro based on the `sprint_number` your team is on?
 
