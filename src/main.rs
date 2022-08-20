@@ -31,6 +31,9 @@ async fn main() {
     let sprint_number = args.sprint_number;
     let total_songs = args.total_songs.unwrap_or(20);
 
+    std::env::set_var("RSPOTIFY_CLIENT_ID", "f9f9113afea14d8698a40a4822d056c2");
+    std::env::set_var("RSPOTIFY_REDIRECT_URI", "http://localhost:8888/callback");
+
     // Authorize the client
     let client = authorize_client().await.unwrap();
 

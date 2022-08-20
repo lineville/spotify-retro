@@ -7,11 +7,11 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug executable 'retro'",
+      "name": "Debug executable 'spotify-retro'",
       "cargo": {
-        "args": ["build", "--bin=retro", "--package=retro"],
+        "args": ["build", "--bin=spotify-retro", "--package=spotify-retro"],
         "filter": {
-          "name": "retro",
+          "name": "spotify-retro",
           "kind": "bin"
         }
       },
@@ -21,11 +21,11 @@
     {
       "type": "lldb",
       "request": "launch",
-      "name": "Debug unit tests in executable 'retro'",
+      "name": "Debug unit tests in executable 'spotify-retro'",
       "cargo": {
-        "args": ["test", "--no-run", "--bin=retro", "--package=retro"],
+        "args": ["test", "--no-run", "--bin=spotify-retro", "--package=spotify-retro"],
         "filter": {
-          "name": "retro",
+          "name": "spotify-retro",
           "kind": "bin"
         }
       },
