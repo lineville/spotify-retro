@@ -2,7 +2,7 @@
 
 Need a quick themed playlist for your upcoming Sprint Retro based on the `sprint_number` your team is on?
 
-Spotify-Retro is a simple CLI tool written in Rust that will generate a playlist for you based on the sprint number you provide
+Spotify-Retro is a simple CLI tool written in Rust that will generate a Spotify playlist for you based on the sprint number you provide
 
 ## Usage
 
