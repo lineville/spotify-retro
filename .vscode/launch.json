@@ -1,0 +1,36 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug executable 'retro'",
+      "cargo": {
+        "args": ["build", "--bin=retro", "--package=retro"],
+        "filter": {
+          "name": "retro",
+          "kind": "bin"
+        }
+      },
+      "args": ["-s", "25"],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Debug unit tests in executable 'retro'",
+      "cargo": {
+        "args": ["test", "--no-run", "--bin=retro", "--package=retro"],
+        "filter": {
+          "name": "retro",
+          "kind": "bin"
+        }
+      },
+      "args": [],
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
