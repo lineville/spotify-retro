@@ -51,8 +51,9 @@ async fn main() {
 
     // Print the playlist output
     match playlist_output {
-        Ok(playlist) => {
-            println!("\n\n{}", playlist);
+        Ok(output) => {
+            println!("\n\n{}", output);
+            open::that(&playlist.external_urls["spotify"]).unwrap();
         }
         Err(err) => {
             println!("\n\n{}", err);
