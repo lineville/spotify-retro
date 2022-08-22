@@ -68,16 +68,17 @@ async fn main() {
 async fn authorize_client() -> Result<AuthCodePkceSpotify, ClientError> {
     println!("You are about to be redirected to your browser to authenticate with Spotify");
     println!("Copy the URL that you are redirected to and paste it back here!");
-
+    
     sleep(Duration::from_secs(3));
-
+    
     let credentials = Credentials::from_env().unwrap();
-
+    
     let oauth =
-        OAuth::from_env(scopes!("playlist-modify-private", "playlist-modify-public")).unwrap();
-
+    OAuth::from_env(scopes!("playlist-modify-private", "playlist-modify-public")).unwrap();
+    
     let mut client = AuthCodePkceSpotify::new(credentials.clone(), oauth.clone());
-
+    
+    // TODO Automatically grab the callback URL and provide it back
     let url = client.get_authorize_url(None).unwrap();
     client.prompt_for_token(&url).await.unwrap();
 
@@ -86,13 +87,13 @@ async fn authorize_client() -> Result<AuthCodePkceSpotify, ClientError> {
 
 // Create a new playlist
 async fn create_playlist(
-    spotify: &AuthCodePkceSpotify,
+    client: &AuthCodePkceSpotify,
     name: &str,
     description: &str,
 ) -> FullPlaylist {
-    let user_id = spotify.current_user().await.unwrap().id;
+    let user_id = client.current_user().await.unwrap().id;
 
-    spotify
+    client
         .user_playlist_create(&user_id, name, Some(false), Some(true), Some(description))
         .await
         .expect("Failed to create new playlist")
