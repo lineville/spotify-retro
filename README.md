@@ -9,6 +9,7 @@ Spotify-Retro is a simple CLI tool written in Rust that will generate a Spotify 
 ### Homebrew
 
 ```bash
+brew tap lineville/spotify-retro
 brew install spotify-retro
 ```
 
