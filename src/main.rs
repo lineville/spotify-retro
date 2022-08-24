@@ -17,9 +17,9 @@ const CALLBACK_URL: &str = "http://localhost:8888/callback";
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
-    // Sprint Number
+    // Sprint Theme
     #[clap(short, long, value_parser)]
-    sprint_number: u32,
+    sprint_theme: String,
 
     // Number of songs to add to the playlist
     #[clap(short, long, value_parser)]
@@ -36,18 +36,18 @@ async fn main() {
 
     // Parse CLI Arguments
     let args = Args::parse();
-    let sprint_number = args.sprint_number;
+    let theme = args.sprint_theme;
     let total_songs = args.total_songs.unwrap_or(20);
 
     // Authorize the client
     let client = authorize_client().await.unwrap();
 
     // Create a new playlist
-    let new_playlist_name = format!("Sprint {}", sprint_number);
+    let new_playlist_name = format!("{} Sprint", theme);
     let playlist = create_playlist(&client, &new_playlist_name, &new_playlist_name).await;
 
     // Get tracks
-    let tracks = get_tracks(&client, &sprint_number.to_string(), total_songs).await;
+    let tracks = get_tracks(&client, &theme, total_songs).await;
 
     // Add tracks to the playlist
     let playlist_output = populate_playlist(&client, &playlist, &tracks).await;
@@ -68,19 +68,21 @@ async fn main() {
 async fn authorize_client() -> Result<AuthCodePkceSpotify, ClientError> {
     println!("You are about to be redirected to your browser to authenticate with Spotify");
     println!("Copy the URL that you are redirected to and paste it back here!");
-    
+
     sleep(Duration::from_secs(3));
-    
+
     let credentials = Credentials::from_env().unwrap();
-    
+
     let oauth =
-    OAuth::from_env(scopes!("playlist-modify-private", "playlist-modify-public")).unwrap();
-    
+        OAuth::from_env(scopes!("playlist-modify-private", "playlist-modify-public")).unwrap();
+
     let mut client = AuthCodePkceSpotify::new(credentials.clone(), oauth.clone());
-    
-    // TODO Automatically grab the callback URL and provide it back
+
     let url = client.get_authorize_url(None).unwrap();
     client.prompt_for_token(&url).await.unwrap();
+
+    // TODO standup a server at the callback URL with a simple landing page
+    // Landing page will just have a friendly message and button to copy the URL
 
     Ok(client)
 }
@@ -115,6 +117,7 @@ async fn populate_playlist(
 ) -> Result<String, ClientError> {
     match tracks {
         SearchResult::Tracks(tracks) => {
+            // Clone and sort tracks by popularity
             let mut tracks = tracks.items.clone();
             tracks.sort_by(|a, b| b.popularity.cmp(&a.popularity));
 

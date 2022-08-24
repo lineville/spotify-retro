@@ -15,7 +15,7 @@
           "kind": "bin"
         }
       },
-      "args": ["-s", "25"],
+      "args": ["-s", "t-swizz"],
       "cwd": "${workspaceFolder}"
     },
     {
