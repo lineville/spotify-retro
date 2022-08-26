@@ -1,5 +1,7 @@
 # Spotify-Retro ![Crates.io](https://img.shields.io/crates/v/spotify-retro)
 
+## 🚧 Under construction
+
 Need a quick themed playlist for your upcoming Sprint Retro based on the `sprint_theme` your team is on?
 
 Spotify-Retro is a simple CLI tool written in Rust that will generate a Spotify playlist for you based on the sprint theme you provide
