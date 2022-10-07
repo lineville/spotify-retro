@@ -1,6 +1,7 @@
 # Spotify-Retro ![Crates.io](https://img.shields.io/crates/v/spotify-retro)
 
-## 🚧 Under construction
+## Get Access
+This is currently in **development mode** so users need to be onboarded manually to the Spotify connected app. If you want access open an issue here with your full name and email used for your spotify account and I can add you to the beta list, up to 25 people.
 
 Need a quick themed playlist for your upcoming Sprint Retro based on the `sprint_theme` your team is on?
 
